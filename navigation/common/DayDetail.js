@@ -11,8 +11,10 @@ const DayDetail = ({
   dayNumber,
   setExercises,
   exercises,
+  exerciseData
 }) => {
   const [search, setSearch] = useState("");
+
 
   const filterExercises = () => {
     if (search.trim() === "") {

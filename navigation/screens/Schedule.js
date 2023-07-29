@@ -30,6 +30,8 @@ const Schedule = () => {
       (schedule) => schedule.active === true
     );
     setActiveSchedule(activeSchedule);
+
+    await handler.checkAndSaveExerciseData()
   };
 
   const renderDays = () => {

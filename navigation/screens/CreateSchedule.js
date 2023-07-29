@@ -12,6 +12,7 @@ const CreateSchedule = () => {
   const [currentSchedule, setCurrentSchedule] = useState();
   const [showDaysOfWeek, setShowDaysOfWeek] = useState(false);
   const [isActive, setIsActive] = useState(true);
+  const [exerciseData, setExerciseData] = useState();
 
   const handler = new AsyncHandler();
 
@@ -23,6 +24,8 @@ const CreateSchedule = () => {
     const newSchedules = await handler.loadSchedulesFromStorage();
     console.log("Loading Schedules for new Schedule");
     setSchedules(newSchedules);
+    const exerciseData = await handler.loadExerciseData()
+    setExerciseData(exerciseData);
   };
 
   const handleProgress = () => {
@@ -62,6 +65,7 @@ const CreateSchedule = () => {
           currentSchedule={currentSchedule}
           schedules={schedules}
           setSchedules={setSchedules}
+          exerciseData={exerciseData}
         />
       )}
     </View>

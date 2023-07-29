@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Swiper from "react-native-swiper";
 import Header from "./Header";
 import { cloneDeep } from "lodash";
+import NewExcercise from "../screens/NewExcercise"
 
 const DaysSection = ({
   workoutDays,
@@ -14,9 +15,11 @@ const DaysSection = ({
   currentSchedule,
   schedules,
   setSchedules,
+  exerciseData
 }) => {
   const [selectedDay, setSelectedDay] = useState(1);
   const [exercises, setExercises] = useState({}); // Use an object to store exercises for each day
+  const [showCreateExcercise, setShowCreateExcercise] = useState(false);
 
   const handler = new AsyncHandler();
   const navigator = useNavigation();
@@ -34,9 +37,8 @@ const DaysSection = ({
     setSelectedDay(1); // Always reset to Day 1 when going back
   };
 
-  const createExcercise = async () => {
-    await saveSchedule();
-    navigator.navigate("NewExcercise");
+  const createExcercise = () => {
+    setShowCreateExcercise(!showCreateExcercise);
   };
 
   const saveSchedule = async () => {
@@ -54,6 +56,7 @@ const DaysSection = ({
 
   const renderDays = () => {
     const days = [];
+
     for (let i = 0; i < workoutDays; i++) {
       days.push(
         <DayDetail
@@ -63,6 +66,7 @@ const DaysSection = ({
           setExercises={setExercises}
           exercises={exercises} // Retrieve exercises for the selected day
           save={saveSchedule}
+          exerciseData={exerciseData}
         />
       );
     }
@@ -71,16 +75,29 @@ const DaysSection = ({
 
   return (
     <>
-      <Header
-        handleBack={handleBack}
-        handleSave={saveSchedule}
-        createExcercise={createExcercise}
-      />
-      <View style={{ flex: 1 }}>
-        <Swiper horizontal loop={false} showsPagination={false}>
-          {renderDays()}
-        </Swiper>
-      </View>
+      {!showCreateExcercise ? (
+        <>
+          <Header
+            handleBack={handleBack}
+            handleSave={saveSchedule}
+            createExcercise={createExcercise}
+          />
+          <View style={{ flex: 1 }}>
+            <Swiper horizontal loop={false} showsPagination={false}>
+              {renderDays()}
+            </Swiper>
+          </View>
+        </>
+      ) : (
+        <>
+          <Header
+            handleBack={createExcercise}
+            handleSave={saveSchedule}
+            createExcercise={createExcercise}
+          />
+          <NewExcercise />
+        </>
+      )}
     </>
   );
 };
