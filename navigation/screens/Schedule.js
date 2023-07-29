@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Pressable, FlatList, ScrollView } from "react-native";
 import AsyncHandler from "../data/AsyncHandler";
 import ScheduleListItem from "../common/ScheduleListItem";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import styles from "../../styles";
 import DayListItem from "../common/DayListItem";
 import NumberSelector from "../common/NumberSelector";
@@ -14,6 +14,7 @@ const Schedule = () => {
   const [currentWeek, setCurrentWeek] = useState(1);
   const [currentDay, setCurrentDay] = useState(1);
 
+  const navigator = useNavigation();
   const handler = new AsyncHandler();
 
   useFocusEffect(
@@ -66,6 +67,15 @@ const Schedule = () => {
       setCurrentDay(currentDay - 1);
     }
   };
+
+  const beginWorkout = () => {
+    navigator.navigate("Workout", {
+      week: currentWeek,
+      day: currentDay,
+      excercises: activeSchedule.selectedDays[currentDay]
+    });
+  }
+
   return (
     <View style={styles.scheduleContainer}>
       {activeSchedule ? (
@@ -91,7 +101,7 @@ const Schedule = () => {
               contentContainerStyle={styles.workoutDaysFlatList}
             />
           </View>
-          <Pressable style={styles.playButton}>
+          <Pressable style={styles.playButton} onPress={beginWorkout}>
             <AntDesign name="playcircleo" size={100} color="#ECA400" />
           </Pressable>
         </View>

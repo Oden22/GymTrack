@@ -5,6 +5,7 @@ import ScheduleDetail from "./screens/ScheduleDetail";
 import { useNavigation } from "@react-navigation/native";
 import CreatedSchedules from "./screens/CreatedSchedules"
 import NewExcercise from "./screens/NewExcercise";
+import Workout from "./screens/Workout";
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ const AppStack = () => {
         component={ScheduleDetail}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="Workout" component={Workout} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

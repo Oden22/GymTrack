@@ -3,9 +3,7 @@ import { View, Text, TextInput, FlatList, StyleSheet, KeyboardAvoidingView } fro
 import styles from "../../styles";
 import ExerciseListItem from "./ExerciseListItem";
 import ExerciseChoosenList from "./ExerciseChoosenList";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { cloneDeep } from "lodash";
-import exerciseData from "../data/exercise_data.json"
 
 const DayDetail = ({
   dayNumber,

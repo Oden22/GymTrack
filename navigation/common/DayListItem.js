@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, TextInput } from "react-native";
+import { View, Text} from "react-native";
 import styles from "../../styles";
-import { AntDesign } from "@expo/vector-icons";
 
 const DayListItem = ({ dayNumber, excercise }) => {
   return (

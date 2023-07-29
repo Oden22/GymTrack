@@ -2,10 +2,6 @@ import React from 'react'
 import {
   View,
   Text,
-  TextInput,
-  FlatList,
-  StyleSheet,
-  Button,
   Pressable,
 } from "react-native";
 import styles from '../../styles';
